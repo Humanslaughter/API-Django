@@ -60,7 +60,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DEV' in os.environ
 
-ALLOWED_HOSTS = ['localhost', 'api-django-5.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', 'api-django-5-e93439fb77b5.herokuapp.com']
 
 
 # Application definition
