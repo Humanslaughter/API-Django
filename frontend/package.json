@@ -43,7 +43,8 @@
     ]
   },
   "devDependencies": {
-    "msw": "^0.35.0"
+    "msw": "^0.35.0",
+    "react-app-rewired": "^2.2.1"
   },
   "engines": {
     "node": "16.19.1",
