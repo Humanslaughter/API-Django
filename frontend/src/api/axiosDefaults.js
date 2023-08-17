@@ -1,3 +1,9 @@
+import axios from 'axios';
+
+// axios.defaults.baseURL = '';
+axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
+axios.defaults.withCredentials = true;
+
 // IMPORTANT!!
  // Because this React app is running in the same workspace as the API,
 
