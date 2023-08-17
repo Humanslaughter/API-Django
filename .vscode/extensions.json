@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+        "ms-python.python",
+        "ms-python.isort",
+        "eventyret.bootstrap-4-cdn-snippet",
+        "dsznajder.es7-react-js-snippets",
+        "esbenp.prettier-vscode",
+        "formulahendry.auto-close-tag"
+    ]
+}
