@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
                 ('updated_at', models.DateTimeField(auto_now=True)),
                 ('title', models.CharField(max_length=255)),
                 ('content', models.TextField(blank=True)),
-                ('image', models.ImageField(blank=True, default='../default_post_hde9ti', upload_to='images/')),
+                ('image', models.ImageField(blank=True, default='../default_post_rn4qcl', upload_to='images/')),
                 ('owner', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
             options={
