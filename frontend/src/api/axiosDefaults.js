@@ -7,7 +7,7 @@ import axios from 'axios';
 
  // Setting a baseURL before you reach deployment will cause errors
 
-// axios.defaults.baseURL = '';
+// axios.defaults.baseURL = 'https://api-django-5-e93439fb77b5.herokuapp.com/';
 axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
 axios.defaults.withCredentials = true;
 
