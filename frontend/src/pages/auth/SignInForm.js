@@ -9,7 +9,8 @@ import Row from "react-bootstrap/Row";
 import Image from "react-bootstrap/Image";
 import Container from "react-bootstrap/Container";
 
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import styles from "../../styles/SignInUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
@@ -51,7 +52,7 @@ function SignInForm() {
         <Row className={styles.Row}>
          <Col className="my-auto p-0 p-md-2" md={6}>
             <Container className={`${appStyles.Content} p-4 `}>
-            <h1 className={styles.Header}>sign in</h1>
+            <h1 className={styles.Header}>Sign in</h1>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group controlId="username">
                         <Form.Label className="d-none">Username</Form.Label>
