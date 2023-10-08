@@ -14,6 +14,7 @@ import Comment from "../comments/Comment";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Asset from "../../components/Asset";
 import { fetchMoreData } from "../../utils/utils";
+import PopularProfiles from "../profiles/PopularProfiles";
 
 function PostPage() {
   const { id } = useParams();
@@ -43,7 +44,7 @@ const [comments, setComments] = useState({ results: [] });
   return (
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2" lg={8}>
-        <p>Popular profiles on mobile</p>
+      <PopularProfiles mobile />
         <Post {...post.results[0]} setPosts={setPost} postPage />
         <Container className={appStyles.Content}>
         {currentUser ? (
@@ -80,7 +81,7 @@ const [comments, setComments] = useState({ results: [] });
         </Container>
       </Col>
       <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
-        Popular profiles on desktop
+      <PopularProfiles />
       </Col>
     </Row>
   );
