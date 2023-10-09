@@ -15,8 +15,10 @@ import Asset from "../../components/Asset";
 import { Image } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
+import { useRedirect } from "../../hooks/useRedirect";
 
 function PostCreateForm() {
+  useRedirect('loggedOut');
   const [errors, setErrors] = useState({});
 
   const [postData, setPostData] = useState({
@@ -57,7 +59,7 @@ function PostCreateForm() {
     try {
         const {data} = await axiosReq.post('/posts/', formData);
         history.push(`/posts/${data.id}`);
-    } catch(err) {
+    } catch (err) {
         console.log(err);
         if (err.response?.status !== 401) {
             setErrors(err.response?.data);

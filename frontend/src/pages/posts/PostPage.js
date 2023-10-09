@@ -33,7 +33,7 @@ const [comments, setComments] = useState({ results: [] });
             ]);
             setPost({results: [post] });
             setComments(comments);
-        } catch(err) {
+        } catch (err) {
             console.log(err);
         }
     };
