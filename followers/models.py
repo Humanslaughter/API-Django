@@ -3,17 +3,17 @@ from django.contrib.auth.models import User
 
 
 class Follower(models.Model):
-    owner = models.ForeignKey(
+    account_owner = models.ForeignKey(
         User, related_name='following', on_delete=models.CASCADE
     )
     followed = models.ForeignKey(
         User, related_name='followed', on_delete=models.CASCADE
     )
-    created_at = models.DateTimeField(auto_now_add=True)
+    made_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ['-created_at']
-        unique_together = ['owner', 'followed']
+        ordering = ['-made_at']
+        unique_together = ['account_owner', 'followed']
 
     def __str__(self):
-        return f'{self.owner} {self.followed}'
+        return f'{self.account_owner} {self.followed}'

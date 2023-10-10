@@ -20,8 +20,8 @@ const UserPasswordForm = () => {
   const currentUser = useCurrentUser();
 
   const [userData, setUserData] = useState({
-    new_password1: "",
-    new_password2: "",
+    new_password1: '',
+    new_password2: '',
   });
   const { new_password1, new_password2 } = userData;
 
@@ -36,8 +36,8 @@ const UserPasswordForm = () => {
 
   useEffect(() => {
     if (currentUser?.profile_id?.toString() !== id) {
-      // redirect user if they are not the owner of this profile
-      history.push("/");
+      // Redirect user if they're' not the account owner of this profile
+      history.push('/');
     }
   }, [currentUser, history, id]);
 

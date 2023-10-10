@@ -18,37 +18,37 @@ export const fetchMoreData = async (resource, setResource) => {
 
 export const followHelper = (profile, clickedProfile, following_id) => {
   return profile.id === clickedProfile.id
-    ? // This is the profile I clicked on,
-      // update it's followers count and set its following id
+    ? // The profile that's clicked on,
+      // update it's followers count and set it's following id
       {
         ...profile,
         followers_count: profile.followers_count + 1,
         following_id,
       }
-    : profile.is_owner
-    ? // This is the profile of the logged in user
+    : profile.is_account_owner
+    ? // The profile of the logged in user
       // update it's following count
       { ...profile, following_count: profile.following_count + 1 }
-    : // This is not the profile the user clicked on or the profile
-      // the user owns, so just return it unchanged
+    : // This isn't the profile the user clicked on or the profile
+      // the user owns, just return it unchanged
       profile;
 };
 
 export const unfollowHelper = (profile, clickedProfile) => {
   return profile.id === clickedProfile.id
-    ? // This is the profile I clicked on,
+    ? // The profile that's clicked on,
       // update it's followers count and set it's following id
       {
         ...profile,
         followers_count: profile.followers_count - 1,
         following_id: null,
       }
-    : profile.is_owner
-    ? // This is the profile of the logged in user
+    : profile.is_account_owner
+    ? // The profile of the logged in user
       // update it's following count
       { ...profile, following_count: profile.following_count - 1 }
-    : // This is not the profile the user clicked on or the profile
-      // the user owns, so just return it unchanged
+    : // This isn't the profile the user clicked on or the profile
+      // the user owns, just return it unchanged
       profile;
 };
 

@@ -27,7 +27,7 @@ function CommentEditForm(props) {
             ? {
                 ...comment,
                 content: formContent.trim(),
-                updated_at: "now",
+                edited_at: 'now',
               }
             : comment;
         }),
@@ -67,6 +67,6 @@ function CommentEditForm(props) {
       </div>
     </Form>
   );
-}
+};
 
 export default CommentEditForm;

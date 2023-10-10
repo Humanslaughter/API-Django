@@ -9,7 +9,7 @@ from .settings import (
 @api_view()
 def root_route(request):
     return Response({
-        "message": "PP5 drf API"
+        "message": "'Capture The Moments' drf API"
     })
 
 # dj-rest-auth logout view fix

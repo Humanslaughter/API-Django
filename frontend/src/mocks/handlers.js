@@ -12,7 +12,8 @@ export const handlers = [
                 first_name: '',
                 last_name: '',
                 profile_id: 15,
-                profile_image: 'https://res.cloudinary.com/dsllv7c2n/image/upload/v1/media/images/Photo_1636490896993_remastered_yjfp7y',
+                profile_image:
+                    'https://res.cloudinary.com/dsllv7c2n/image/upload/v1/media/images/Photo_1636490896993_remastered_yjfp7y',
             })
         );
     }),

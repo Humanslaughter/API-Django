@@ -9,45 +9,45 @@ import { useSetProfileData } from '../../contexts/ProfileDataContext';
 
 const Profile = (props) => {
   const { profile, mobile, imageSize = 55 } = props;
-  const { id, following_id, image, owner } = profile;
+  const { id, following_id, image, account_owner } = profile;
 
   const currentUser = useCurrentUser();
-  const is_owner = currentUser?.username === owner;
+  const is_account_owner = currentUser?.username === account_owner;
 
   const {handleFollow, handleUnfollow} = useSetProfileData();
 
   return (
     <div
-        className={`my-3 d-flex allign-items-center ${mobile && 'flex-column'}`}
+      className={`my-3 d-flex allign-items-center ${mobile && 'flex-column'}`}
     >
       <div>
         <Link className='align-self-center' to={`/profiles/${id}`}>
-            <Avatar src={image} height={imageSize} />
+          <Avatar src={image} height={imageSize} />
         </Link>
       </div>
-       <div className={`mx-2 ${styles.WordBreak}`}>
-        <strong>{owner}</strong>
-        </div> 
-        <div className={`text-right ${!mobile && 'ml-auto'}`}>
-           {!mobile &&
-              currentUser &&
-              !is_owner &&
-              (following_id ? (
-                <Button
-                    className={`${btnStyles.Button} ${btnStyles.BlackOutline}`}
-                    onClick={() => handleUnfollow(profile)}
-                >
-                    Unfollow
-                </Button>
-             ) : (
-                <Button 
-                    className={`${btnStyles.Button} ${btnStyles.Black}`}
-                    onClick={() => handleFollow(profile)}
-                >
-                    Follow
-                </Button>
-             ))} 
-        </div>
+      <div className={`mx-2 ${styles.WordBreak}`}>
+        <strong>{account_owner}</strong>
+      </div> 
+      <div className={`text-right ${!mobile && 'ml-auto'}`}>
+        {!mobile &&
+          currentUser &&
+          !is_account_owner &&
+          (following_id ? (
+            <Button
+              className={`${btnStyles.Button} ${btnStyles.BlackOutline}`}
+              onClick={() => handleUnfollow(profile)}
+            >
+              Unfollow
+            </Button>
+          ) : (
+            <Button 
+              className={`${btnStyles.Button} ${btnStyles.Black}`}
+              onClick={() => handleFollow(profile)}
+            >
+              Follow
+            </Button>
+          ))} 
+      </div>
     </div>
   );
 };

@@ -42,9 +42,9 @@ function PostCreateForm() {
     if (event.target.files.length) {
         URL.revokeObjectURL(image);
         setPostData({
-            ...postData,
-            image: URL.createObjectURL(event.target.files[0]),
-        });
+          ...postData,
+          image: URL.createObjectURL(event.target.files[0]),
+      });
     }
   };
 
@@ -57,13 +57,13 @@ function PostCreateForm() {
     formData.append('image', imageInput.current.files[0]);
 
     try {
-        const {data} = await axiosReq.post('/posts/', formData);
-        history.push(`/posts/${data.id}`);
+      const { data } = await axiosReq.post('/posts/', formData);
+      history.push(`/posts/${data.id}`);
     } catch (err) {
-        console.log(err);
-        if (err.response?.status !== 401) {
-            setErrors(err.response?.data);
-        }
+      console.log(err);
+      if (err.response?.status !== 401) {
+        setErrors(err.response?.data);
+      }
     }
   };
 
@@ -72,33 +72,33 @@ function PostCreateForm() {
       <Form.Group>
         <Form.Label>Title</Form.Label>
         <Form.Control
-            type="text"
-            name="title" 
-            value={title}
-            onChange={handleChange}
+          type="text"
+          name="title" 
+          value={title}
+          onChange={handleChange}
         />
       </Form.Group>
       {errors?.title?.map((message, idx) => (
         <Alert variant='warning' key={idx}>
-            {message}
+          {message}
         </Alert>
        ))}
 
       <Form.Group>
         <Form.Label>Content</Form.Label>
         <Form.Control 
-            as="textarea"
-            name="content"
-            rows={6}
-            value={content}
-            onChange={handleChange}
+          as="textarea"
+          name="content"
+          rows={6}
+          value={content}
+          onChange={handleChange}
         />
       </Form.Group>
       {errors?.content?.map((message, idx) => (
         <Alert variant='warning' key={idx}>
-            {message}
+          {message}
         </Alert>
-       ))}
+      ))}
 
       <Button
         className={`${btnStyles.Button} ${btnStyles.Blue}`}
@@ -120,44 +120,45 @@ function PostCreateForm() {
             className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
           >
             <Form.Group className="text-center">
-                {image ? (
-                    <>
-                        <figure>
-                            <Image className={appStyles.Image} src={image} rounded />
-                        </figure>
-                        <div>
-                            <Form.Label
-                                className={`${btnStyles.Button} ${btnStyles.Blue} btn`}
-                                htmlFor="image-upload"
-                            >
-                                Edit image
-                            </Form.Label>
-                        </div>
-                    </>
-                ) : (
+              {image ? (
+                <>
+                  <figure>
+                    <Image className={appStyles.Image} src={image} rounded />
+                  </figure>
+                  <div>
                     <Form.Label
-                        className="d-flex justify-content-center"
-                        htmlFor="image-upload"
+                      className={`${btnStyles.Button} ${btnStyles.Blue} btn`}
+                      htmlFor="image-upload"
                     >
-                    <Asset
-                        src={Upload}
-                        message='Select an image'
-                    />
+                      Edit image
                     </Form.Label>
-                ) }
+                  </div>
+                </>
+              ) : (
+                <Form.Label
+                  className="d-flex justify-content-center"
+                  htmlFor="image-upload"
+                >
+                  <Asset
+                    src={Upload}
+                    message='Select an image'
+                  />
+                </Form.Label>
+              )}
                 
-                <Form.File
-                    id="image-upload"
-                    accept="image/*"
-                    onChange={handleChangeImage}
-                    ref={imageInput}
-                />
+              <Form.File
+                id="image-upload"
+                accept="image/*"
+                onChange={handleChangeImage}
+                ref={imageInput}
+              />
             </Form.Group>
             {errors?.image?.map((message, idx) => (
-                <Alert variant='warning' key={idx}>
-                    {message}
-                </Alert>
+              <Alert variant='warning' key={idx}>
+                {message}
+              </Alert>
             ))}
+
             <div className="d-md-none">{textFields}</div>
           </Container>
         </Col>
@@ -167,6 +168,6 @@ function PostCreateForm() {
       </Row>
     </Form>
   );
-}
+};
 
 export default PostCreateForm;

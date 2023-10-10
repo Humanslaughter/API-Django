@@ -4,11 +4,11 @@ from likes.models import Like
 
 
 class LikeSerializer(serializers.ModelSerializer):
-    owner = serializers.ReadOnlyField(source='owner.username')
+    account_owner = serializers.ReadOnlyField(source='account_owner.username')
 
     class Meta:
         model = Like
-        fields = ['id', 'created_at', 'owner', 'post']
+        fields = ['id', 'made_at', 'account_owner', 'post']
 
     
     def create(self, validated_data):

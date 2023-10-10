@@ -4,28 +4,28 @@ from .models import Comment
 
 
 class CommentSerializer(serializers.ModelSerializer):
-    owner = serializers.ReadOnlyField(source='owner.username')
-    is_owner = serializers.SerializerMethodField()
-    profile_id = serializers.ReadOnlyField(source='owner.profile.id')
-    profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
-    created_at = serializers.SerializerMethodField()
-    updated_at = serializers.SerializerMethodField()
+    account_owner = serializers.ReadOnlyField(source='account_owner.username')
+    is_account_owner = serializers.SerializerMethodField()
+    profile_id = serializers.ReadOnlyField(source='account_owner.profile.id')
+    profile_image = serializers.ReadOnlyField(source='account_owner.profile.image.url')
+    made_at = serializers.SerializerMethodField()
+    edited_at = serializers.SerializerMethodField()
 
-    def get_is_owner(self, obj):
+    def get_is_account_owner(self, obj):
         request = self.context['request']
-        return request.user == obj.owner
+        return request.user == obj.account_owner
 
-    def get_created_at(self, obj):
-        return naturaltime(obj.created_at)
+    def get_made_at(self, obj):
+        return naturaltime(obj.made_at)
 
-    def get_updated_at(self, obj):
-        return naturaltime(obj.updated_at)
+    def get_edited_at(self, obj):
+        return naturaltime(obj.edited_at)
 
     class Meta:
         model = Comment
         fields = [
-            'id', 'owner', 'is_owner', 'profile_id', 'profile_image',
-            'post', 'created_at', 'updated_at', 'content'
+            'id', 'account_owner', 'is_account_owner', 'profile_id', 'profile_image',
+            'post', 'made_at', 'edited_at', 'content'
         ]
 
 

@@ -10,10 +10,7 @@ import Container from "react-bootstrap/Container";
 import Alert from "react-bootstrap/Alert";
 
 import { axiosReq } from "../../api/axiosDefaults";
-import {
-  useCurrentUser,
-  useSetCurrentUser,
-} from "../../contexts/CurrentUserContext";
+import { useCurrentUser, useSetCurrentUser } from "../../contexts/CurrentUserContext";
 
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
@@ -26,9 +23,9 @@ const ProfileEditForm = () => {
   const imageFile = useRef();
 
   const [profileData, setProfileData] = useState({
-    name: "",
-    content: "",
-    image: "",
+    name: '',
+    content: '',
+    image: '',
   });
   const { name, content, image } = profileData;
 
@@ -63,11 +60,11 @@ const ProfileEditForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
-    formData.append("name", name);
-    formData.append("content", content);
+    formData.append('name', name);
+    formData.append('content', content);
 
     if (imageFile?.current?.files[0]) {
-      formData.append("image", imageFile?.current?.files[0]);
+      formData.append('image', imageFile?.current?.files[0]);
     }
 
     try {
@@ -88,16 +85,16 @@ const ProfileEditForm = () => {
       <Form.Group>
         <Form.Label>Bio</Form.Label>
         <Form.Control
-          as="textarea"
+          as='textarea'
           value={content}
           onChange={handleChange}
-          name="content"
+          name='content'
           rows={7}
         />
       </Form.Group>
 
       {errors?.content?.map((message, idx) => (
-        <Alert variant="warning" key={idx}>
+        <Alert variant='warning' key={idx}>
           {message}
         </Alert>
       ))}
@@ -107,7 +104,7 @@ const ProfileEditForm = () => {
       >
         Cancel
       </Button>
-      <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
+      <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type='submit'>
         Save
       </Button>
     </>
@@ -125,22 +122,22 @@ const ProfileEditForm = () => {
                 </figure>
               )}
               {errors?.image?.map((message, idx) => (
-                <Alert variant="warning" key={idx}>
+                <Alert variant='warning' key={idx}>
                   {message}
                 </Alert>
               ))}
               <div>
                 <Form.Label
                   className={`${btnStyles.Button} ${btnStyles.Blue} btn my-auto`}
-                  htmlFor="image-upload"
+                  htmlFor='image-upload'
                 >
                   Change the image
                 </Form.Label>
               </div>
               <Form.File
-                id="image-upload"
+                id='image-upload'
                 ref={imageFile}
-                accept="image/*"
+                accept='image/*'
                 onChange={(e) => {
                   if (e.target.files.length) {
                     setProfileData({

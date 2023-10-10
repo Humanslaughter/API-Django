@@ -30,11 +30,11 @@ function ProfilePage() {
   const currentUser = useCurrentUser();
   const { id } = useParams();
 
-  const {setProfileData, handleFollow, handleUnfollow} = useSetProfileData();
+  const { setProfileData, handleFollow, handleUnfollow } = useSetProfileData();
   const { pageProfile } = useProfileData();
 
   const [profile] = pageProfile.results;
-  const is_owner = currentUser?.username === profile?.owner;
+  const is_account_owner = currentUser?.username === profile?.account_owner;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,7 +42,7 @@ function ProfilePage() {
         const [{ data: pageProfile }, { data: profilePosts }] =
           await Promise.all([
             axiosReq.get(`/profiles/${id}/`),
-            axiosReq.get(`/posts/?owner__profile=${id}`),
+            axiosReq.get(`/posts/?account_owner__profile=${id}`),
           ]);
         setProfileData((prevState) => ({
           ...prevState,
@@ -59,7 +59,7 @@ function ProfilePage() {
 
   const mainProfile = (
     <>
-    {profile?.is_owner && <ProfileEditDropdown id={profile?.id} />}
+    {profile?.is_account_owner && <ProfileEditDropdown id={profile?.id} />}
       <Row noGutters className="px-3 text-center">
         <Col lg={3} className="text-lg-left">
           <Image 
@@ -69,25 +69,25 @@ function ProfilePage() {
           />
         </Col>
         <Col lg={6}>
-          <h3 className="m-2">{profile?.owner}</h3>
+          <h3 className="m-2">{profile?.account_owner}</h3>
           <Row className="justify-content-center no-gutters">
             <Col xs={3} className="my-2">
-                <div>{profile?.posts_count}</div>
-                <div>Posts</div>
+              <div>{profile?.posts_count}</div>
+              <div>Posts</div>
             </Col>
             <Col xs={3} className="my-2">
-                <div>{profile?.followers_count}</div>
-                <div>Followers</div>
+              <div>{profile?.followers_count}</div>
+              <div>Followers</div>
             </Col>
             <Col xs={3} className="my-2">
-                <div>{profile?.following_count}</div>
-                <div>Following</div>
+              <div>{profile?.following_count}</div>
+              <div>Following</div>
             </Col>
           </Row>
         </Col>
         <Col lg={3} className="text-lg-right">
           {currentUser &&
-            !is_owner &&
+            !is_account_owner &&
             (profile?.following_id ? (
               <Button
                 className={`${btnStyles.Button} ${btnStyles.BlackOutline}`}
@@ -112,7 +112,7 @@ function ProfilePage() {
   const mainProfilePosts = (
     <>
       <hr />
-      <p className="text-center">{profile?.owner}'s Posts</p>
+      <p className="text-center">{profile?.account_owner}'s Posts</p>
       <hr />
       {profilePosts.results.length ? (
         <InfiniteScroll
@@ -127,7 +127,7 @@ function ProfilePage() {
       ) : (
         <Asset
           src={NoResults}
-          message={`${profile?.owner} has no posts.`}
+          message={`${profile?.account_owner} has no posts yet.`}
         />
       )}
     </>
@@ -153,6 +153,6 @@ function ProfilePage() {
       </Col>
     </Row>
   );
-}
+};
 
 export default ProfilePage;

@@ -42,42 +42,42 @@ export const CurrentUserProvider = ({ children }) => {
               });
               removeTokenTimestamp();
               return config;
+            }
           }
-          }
-            return config;
+          return config;
         },
         (err) => {
-            return Promise.reject(err);
+          return Promise.reject(err);
         }
-    );
+      );
 
-    axiosRes.interceptors.response.use(
+      axiosRes.interceptors.response.use(
         (response) => response,
         async (err) => {
             if (err.response?.status === 401) {
               try {
-                 await axios.post('dj-rest-auth/token/refresh/');
-               } catch (err) {
-                 setCurrentUser(prevCurrentUser => {
-                    if (prevCurrentUser){
-                      history.push('/signin');
-                    }
-                    return null;
-                 });
-                 removeTokenTimestamp();
-               }
-               return axios(err.config);
+                await axios.post('dj-rest-auth/token/refresh/');
+              } catch (err) {
+                setCurrentUser((prevCurrentUser) => {
+                  if (prevCurrentUser){
+                    history.push('/signin');
+                  }
+                  return null;
+                });
+                removeTokenTimestamp();
+              }
+              return axios(err.config);
             }
             return Promise.reject(err);
          }
-    );
-  }, [history]);
+      );
+    }, [history]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-        <SetCurrentUserContext.Provider value={setCurrentUser}>
-            {children}
-        </SetCurrentUserContext.Provider>
+      <SetCurrentUserContext.Provider value={setCurrentUser}>
+          {children}
+      </SetCurrentUserContext.Provider>
     </CurrentUserContext.Provider>
-  )
-}
+  );
+};

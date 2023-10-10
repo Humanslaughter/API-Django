@@ -10,7 +10,7 @@ import { axiosRes } from "../../api/axiosDefaults";
 
 function CommentCreateForm(props) {
   const { post, setPost, setComments, profileImage, profile_id } = props;
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState('');
 
   const handleChange = (event) => {
     setContent(event.target.value);
@@ -35,7 +35,7 @@ function CommentCreateForm(props) {
           },
         ],
       }));
-      setContent("");
+      setContent('');
     } catch (err) {
       console.log(err);
     }
@@ -63,10 +63,10 @@ function CommentCreateForm(props) {
         disabled={!content.trim()}
         type="submit"
       >
-        Send
+        Post
       </button>
     </Form>
   );
-}
+};
 
 export default CommentCreateForm;

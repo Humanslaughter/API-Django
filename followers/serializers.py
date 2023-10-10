@@ -4,13 +4,13 @@ from .models import Follower
 
 
 class FollowerSerializer(serializers.ModelSerializer):
-    owner = serializers.ReadOnlyField(source='owner.username')
+    account_owner = serializers.ReadOnlyField(source='account_owner.username')
     followed_name = serializers.ReadOnlyField(source='followed.username')
 
     class Meta:
         model = Follower
         fields = [
-            'id', 'owner', 'created_at', 'followed', 'followed_name'
+            'id', 'account_owner', 'made_at', 'followed', 'followed_name'
         ]
 
     def create(self, validated_data):

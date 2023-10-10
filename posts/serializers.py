@@ -4,10 +4,10 @@ from likes.models import Like
 
 
 class PostSerializer(serializers.ModelSerializer):
-    owner = serializers.ReadOnlyField(source='owner.username')
-    is_owner = serializers.SerializerMethodField()
-    profile_id = serializers.ReadOnlyField(source='owner.profile.id')
-    profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
+    account_owner = serializers.ReadOnlyField(source='account_owner.username')
+    is_account_owner = serializers.SerializerMethodField()
+    profile_id = serializers.ReadOnlyField(source='account_owner.profile.id')
+    profile_image = serializers.ReadOnlyField(source='account_owner.profile.image.url')
     like_id = serializers.SerializerMethodField()
     likes_count = serializers.ReadOnlyField()
     comments_count = serializers.ReadOnlyField()
@@ -25,15 +25,15 @@ class PostSerializer(serializers.ModelSerializer):
             )
         return value
 
-    def get_is_owner(self, obj):
+    def get_is_account_owner(self, obj):
         request = self.context['request']
-        return request.user == obj.owner
+        return request.user == obj.account_owner
 
     def get_like_id(self, obj):
         user = self.context['request'].user
         if user.is_authenticated:
             like = Like.objects.filter(
-                owner=user, post=obj
+                account_owner=user, post=obj
             ).first()
             return like.id if like else None
         return None
@@ -41,8 +41,8 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = [
-            'id', 'owner', 'is_owner', 'profile_id',
-            'profile_image', 'created_at', 'updated_at',
+            'id', 'account_owner', 'is_account_owner', 'profile_id',
+            'profile_image', 'made_at', 'edited_at',
             'title', 'content', 'image', 'image_filter',
             'like_id', 'likes_count', 'comments_count',
         ]
