@@ -1,1 +1,1 @@
-web: serve -s build
+gunicorn drf_api.wsgi
