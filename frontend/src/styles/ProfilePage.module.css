@@ -3,6 +3,8 @@
     height: 120px;
     width: 120px;
     margin: 4px;
+    border-radius: 50%;
+    border: 1px solid #a3a3a49f;
   }
   
   @media screen and (max-width: 991px) {
