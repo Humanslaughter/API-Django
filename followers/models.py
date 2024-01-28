@@ -3,12 +3,8 @@ from django.contrib.auth.models import User
 
 
 class Follower(models.Model):
-    account_owner = models.ForeignKey(
-        User, related_name='following', on_delete=models.CASCADE
-    )
-    followed = models.ForeignKey(
-        User, related_name='followed', on_delete=models.CASCADE
-    )
+    followed = models.ForeignKey(User, related_name='followed', on_delete=models.CASCADE)
+    account_owner = models.ForeignKey(User, related_name='following', on_delete=models.CASCADE)
     made_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
