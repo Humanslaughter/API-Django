@@ -4,11 +4,11 @@ from posts.models import Post
 
 
 class Comment(models.Model):
-    account_owner = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    content = models.TextField()
+    account_owner = models.ForeignKey(User, on_delete=models.CASCADE)
     made_at = models.DateTimeField(auto_now_add=True)
     edited_at = models.DateTimeField(auto_now=True)
-    content = models.TextField()
 
     class Meta:
         ordering = ['-made_at']
