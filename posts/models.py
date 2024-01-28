@@ -21,16 +21,12 @@ class Post(models.Model):
         ('xpro2', 'X-pro II')
     ]
     account_owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    made_at = models.DateTimeField(auto_now_add=True)
-    edited_at = models.DateTimeField(auto_now=True)
+    image = models.ImageField(upload_to='images/', default='../default_post_hde9ti', blank=True)
+    image_filter = models.CharField(max_length=32, choices=image_filter_choices, default='normal')
     title = models.CharField(max_length=255)
     content = models.TextField(blank=True)
-    image = models.ImageField(
-        upload_to='images/', default='../default_post_hde9ti', blank=True
-    )
-    image_filter = models.CharField(
-        max_length=32, choices=image_filter_choices, default='normal'
-    )
+    made_at = models.DateTimeField(auto_now_add=True)
+    edited_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ['-made_at']
