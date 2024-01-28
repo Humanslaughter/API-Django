@@ -94,11 +94,6 @@ const NavBar = () => {
       fixed="top"
     >
       <Container>
-        <NavLink to="/">
-          <Navbar.Brand>
-            <img src={logo} alt="logo" height="45" />
-          </Navbar.Brand>
-        </NavLink>
         {currentUser && addPostIcon}
         <Navbar.Toggle 
           ref={ref}
