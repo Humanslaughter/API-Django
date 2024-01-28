@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 import Media from "react-bootstrap/Media";
 import { Link } from "react-router-dom";
 import Avatar from "../../components/Avatar";
@@ -24,6 +26,8 @@ const Comment = (props) => {
   const currentUser = useCurrentUser();
   const is_account_owner = currentUser?.username === account_owner;
 
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
   const handleDelete = async () => {
     try {
       await axiosRes.delete(`/comments/${id}/`);
@@ -40,7 +44,11 @@ const Comment = (props) => {
           ...prevComments,
           results: prevComments.results.filter((comment) => comment.id !== id),
       }));
-    } catch (err) {}
+    } catch (err) {
+
+    }
+    
+    setShowDeleteModal(false);
   };
 
   return (
@@ -69,9 +77,24 @@ const Comment = (props) => {
         {is_account_owner && !showEditForm && (
           <MoreDropdown
             handleEdit={() => setShowEditForm(true)}
-            handleDelete={handleDelete}
+            handleDelete={() => setShowDeleteModal(true)}
           />
         )}
+
+        <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
+          <Modal.Header closeButton>
+            <Modal.Title>Confirm Deletion</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Are you sure you want to delete this comment?</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
+              Cancel
+            </Button>
+            <Button variant="danger" onClick={handleDelete}>
+              Delete
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </Media>
     </>
   );
