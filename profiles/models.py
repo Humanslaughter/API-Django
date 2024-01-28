@@ -4,14 +4,12 @@ from django.contrib.auth.models import User
 
 
 class Profile(models.Model):
+    image = models.ImageField(upload_to='images/', default='../default_profile_ftyuqx')
     account_owner = models.OneToOneField(User, on_delete=models.CASCADE)
-    made_at = models.DateTimeField(auto_now_add=True)
-    edited_at = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=255, blank=True)
     content = models.TextField(blank=True)
-    image = models.ImageField(
-        upload_to='images/', default='../default_profile_ftyuqx'
-    )
+    made_at = models.DateTimeField(auto_now_add=True)
+    edited_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ['-made_at']
