@@ -1,4 +1,6 @@
-import React from 'react';
+import React from "react";
+import Modal from 'react-bootstrap/esm/Modal';
+import Button from 'react-bootstrap/esm/Button';
 import styles from '../../styles/Post.module.css';
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import Card from 'react-bootstrap/Card';
@@ -9,8 +11,10 @@ import { Link, useHistory } from "react-router-dom";
 import Avatar from "../../components/Avatar";
 import { axiosRes } from '../../api/axiosDefaults';
 import { MoreDropdown } from '../../components/MoreDropdown';
+import { useState } from 'react';
 
 const Post = (props) => {
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const {
       id,
       account_owner,
@@ -89,10 +93,25 @@ const Post = (props) => {
             {is_account_owner && postPage && (
             <MoreDropdown
               handleEdit={handleEdit} 
-              handleDelete={handleDelete}
+              handleDelete={() => setShowDeleteModal(true)}
             />
           )}
+
         </div>
+          <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
+          <Modal.Header closeButton>
+            <Modal.Title>Confirm Deletion</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Are you sure you want to delete this post?</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
+              Cancel
+            </Button>
+            <Button variant="danger" onClick={handleDelete}>
+              Delete
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </Media>
     </Card.Body>
     <Link to={`/posts/${id}`}>
