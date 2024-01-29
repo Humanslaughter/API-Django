@@ -17,6 +17,7 @@ import appStyles from "../../App.module.css";
 const UsernameForm = () => {
   const [username, setUsername] = useState('');
   const [errors, setErrors] = useState({});
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
 
   const history = useHistory();
   const { id } = useParams();
@@ -42,17 +43,29 @@ const UsernameForm = () => {
         ...prevUser,
         username,
       }));
-      history.goBack();
+      setShowSuccessAlert(true);
     } catch (err) {
-      // console.log(err);
       setErrors(err.response?.data);
     }
+  };
+
+  const handlePromptClose = () => {
+    setShowSuccessAlert(false);
+    history.push(`/profiles/${currentUser?.profile_id}`);
   };
 
   return (
     <Row>
       <Col className="py-2 mx-auto text-center" md={6}>
         <Container className={appStyles.Content}>
+          <Alert
+              variant="success"
+              show={showSuccessAlert}
+              onClose={handlePromptClose}
+              dismissible
+          >
+              Username successfully changed!
+          </Alert>
           <Form onSubmit={handleSubmit} className="my-2">
             <Form.Group>
               <Form.Label>Change Username</Form.Label>
