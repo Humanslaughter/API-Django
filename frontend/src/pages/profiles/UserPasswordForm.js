@@ -26,6 +26,7 @@ const UserPasswordForm = () => {
   const { new_password1, new_password2 } = userData;
 
   const [errors, setErrors] = useState({});
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
 
   const handleChange = (event) => {
     setUserData({
@@ -37,7 +38,7 @@ const UserPasswordForm = () => {
   useEffect(() => {
     if (currentUser?.profile_id?.toString() !== id) {
       // Redirect user if they don't own this profile
-      history.push('/');
+      history.push("/");
     }
   }, [currentUser, history, id]);
 
@@ -45,17 +46,31 @@ const UserPasswordForm = () => {
     event.preventDefault();
     try {
       await axiosRes.post("/dj-rest-auth/password/change/", userData);
-      history.goBack();
+      setShowSuccessAlert(true);
     } catch (err) {
-      // console.log(err);
+      console.log(err);
       setErrors(err.response?.data);
     }
   };
+
+  const handlePromptClose = () => {
+    setShowSuccessAlert(false);
+    history.push(`/profiles/${currentUser?.profile_id}`);
+  };
+
 
   return (
     <Row>
       <Col className="py-2 mx-auto text-center" md={6}>
         <Container className={appStyles.Content}>
+        <Alert
+            variant="success"
+            show={showSuccessAlert}
+            onClose={handlePromptClose}
+            dismissible
+          >
+            Password successfully changed!
+          </Alert>
           <Form onSubmit={handleSubmit}>
             <Form.Group>
               <Form.Label>New Password</Form.Label>
